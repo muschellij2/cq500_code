@@ -1,0 +1,1 @@
+rsync --progress code/* $jdenig:/legacy/dexter/disk2/smart/stroke_ct/ident/CQ500/code
