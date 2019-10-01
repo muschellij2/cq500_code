@@ -8,7 +8,9 @@ setwd(here::here())
 df = readr::read_rds("results/directory_df.rds")
 
 df = df %>%
-  filter(file.exists(ssfile) & file.exists(ss400))
+  filter(file.exists(ssfile) & 
+           file.exists(ss400) & 
+           file.exists(smooth_robust))
 
 # df = df %>%
 #   filter(!(file.exists(regfile) & file.exists(reg400)))
@@ -28,6 +30,7 @@ func = function(infile, outfile, template) {
       outfile = outfile,
       template.file = template, 
       typeofTransform = "Rigid",
+      retimg = FALSE,
       interpolator = "NearestNeighbor")
     file.copy(
       ss$fwdtransforms,
@@ -41,7 +44,7 @@ func = function(infile, outfile, template) {
 }
 
 idf = df[iscen, ]
-template = "templates/scct_stripped_hu8.nii.gz"
+template = "templates/scct_stripped_hu_96x96x96.nii.gz"
 
 
 infile = idf$ssfile
@@ -50,5 +53,10 @@ out = func(infile, outfile, template)
   
 infile = idf$ss400
 outfile = idf$reg400
+func(infile, outfile, template)
+
+
+infile = idf$smooth_robust
+outfile = idf$smooth_regfile
 func(infile, outfile, template)
 

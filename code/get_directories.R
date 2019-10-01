@@ -40,6 +40,7 @@ df = tibble(
          ss400 = file.path("ss400",  basename(outfile)),
          smooth_robust = file.path("smooth_robust", basename(outfile)),
          regfile = file.path("reg", basename(outfile)),
+         smooth_regfile = file.path("smooth_reg", basename(outfile)),
          reg400 = file.path("reg400",  basename(outfile))         
   )
 df = left_join(df, dcm_df)

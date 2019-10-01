@@ -14,6 +14,7 @@ df = df %>%
 df = df %>%
   filter(file.exists(outfile) & file.exists(ssfile) & file.exists(ss400))
 df$sspng = file.path("results", "ss", paste0(df$stub, ".png"))
+df$png = file.path("results", "nifti", paste0(df$stub, ".png"))
 df$ss400png = file.path("results", "ss400", paste0(df$stub, ".png"))
 
 # df = df %>%
@@ -40,9 +41,22 @@ pick_alpha = function() {
 }
 
 sspng = idf$sspng
+png = idf$png
 ss400png = idf$ss400png
 
-if (!file.exists(sspng) | !file.exists(ss400png)) {
+if (!file.exists(png)) {
+  img = readnii(idf$outfile)
+  wimg = window_img(img)
+  stub = sub("_CT", "", idf$stub)
+  dimg = dim(wimg)
+  z = floor(quantile(1:dimg[3], probs = seq(0.1, 0.9, by = 0.1)))
+  
+  png(png, type = "cairo", height = 7, width = 7, res = 150, units = "in")
+  oro.nifti::slice(wimg, z = z)
+  dev.off()  
+}
+  
+if (!file.exists(sspng) | !file.exists(ss400png) | !file.exists(png)) {
   img = RNifti::readNifti(idf$outfile)
   wimg = window_img(img)
   mask = RNifti::readNifti(idf$ssfile)

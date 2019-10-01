@@ -18,13 +18,13 @@ df = df %>%
                     paste0(stub, ".rds")),
     sub_hdr = file.path("sub_hdr", 
                         paste0(stub, ".rds")))
-
+# 
 # run_df = df %>%
-#   filter(!(file.exists(outfile) & 
-#              file.exists(ssfile) & 
-#              file.exists(ss400) & 
+#   filter(!(file.exists(outfile) &
+#              file.exists(ssfile) &
+#              file.exists(ss400) &
 #              file.exists(smooth_robust)))
-# run_df = run_df %>% 
+# run_df = run_df %>%
 #   filter(n > 1)
 # df = run_df
 iscen = as.numeric(
