@@ -37,7 +37,8 @@ df = df %>%
   mutate(pred_file = file.path("pitch", basename(outfile)),
          out_pred_file = 
            file.path("pitch", paste0(nii.stub(outfile, bn = TRUE),
-                                     "_pitch.nii.gz"))
+                                     "_pitch.nii.gz"),),
+         out_prob_file = sub("_pitch", "_prob", out_pred_file)
   )
 df = left_join(bleeds, df)
 # df = df[ !file.exists(df$pred_file) & file.exists(df$outfile), ]
@@ -52,7 +53,7 @@ if (is.na(iscen)) {
 
 idf = df[iscen,]
 
-if (!file.exists(idf$pred_file)) {
+if (!all(file.exists(idf$pred_file, idf$out_prob_file))) {
   
   res = ich_segment(img = idf$outfile,
                     robust = TRUE, 
@@ -70,5 +71,8 @@ if (!file.exists(idf$pred_file)) {
   
   writenii(native_res$smoothed_prediction_image, 
            filename = idf$out_pred_file)
+  
+  native_prob = native_res$smoothed_probability_image 
+  writenii(native_prob, idf$out_prob_file)
   
 }

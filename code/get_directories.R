@@ -2,6 +2,12 @@ library(here)
 library(dplyr)
 library(tidyr)
 setwd(here::here())
+reads = readr::read_csv("data/reads.csv")
+reads = reads %>% 
+  mutate(name = gsub("-", "", name)) %>% 
+  rename(id = name)
+
+
 dcm_file = "results/all_dicoms.txt"
 if (!file.exists(dcm_file)) {
   dcms = list.files(pattern = ".dcm$", recursive = TRUE, 
@@ -45,3 +51,16 @@ df = tibble(
   )
 df = left_join(df, dcm_df)
 readr::write_rds(df, "results/directory_df.rds", compress = "xz")
+xdf = df
+
+df = xdf
+df = df %>% 
+  select(id, series_name, stub, outfile, 
+         smooth_robust, smooth_regfile, n) %>% 
+  mutate(smooth_robust = sub("[.]nii", "_Mask.nii", smooth_robust)) %>% 
+  rename(img = outfile,
+         brain_mask = smooth_robust, 
+         registered = smooth_regfile) %>% 
+  left_join(reads)
+  
+readr::write_csv(df, "results/directory_df.csv.gz")

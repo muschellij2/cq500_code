@@ -14,17 +14,9 @@ Rnosave n4.R -N N4 -hold_jid_ad SS \
 # 	-l mem_free=30G,h_vmem=32G \
 # 	-t 215,230	
 
-# Rnosave n4.R -N N4 -hold_jid_ad SS \
+# Rnosave pitch_segment.R -N N4 -hold_jid_ad PITCH \
 # 	-l mem_free=30G,h_vmem=32G \
-# 	-t 248,250
-
-# Rnosave n4.R -N N4 -hold_jid_ad SS \
-# 	-l mem_free=30G,h_vmem=32G \
-# 	-t 325,478	
-
-# Rnosave n4.R -N N4 -hold_jid_ad SS \
-# 	-l mem_free=30G,h_vmem=32G \
-# 	-t 1220
+# 	-t 1-1271
 
 cd $dex/CQ500/code
 
