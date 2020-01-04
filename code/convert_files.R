@@ -70,6 +70,7 @@ if (is.na(iscen)) {
       smooth_before_threshold = TRUE,
       smooth.factor = 1,
       remove.neck = TRUE,
+      remover = "remove_neck",
       recog = FALSE,
       nvoxels = 0)
   }

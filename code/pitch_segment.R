@@ -10,7 +10,19 @@ reads = read_csv("zip/reads.csv")
 reads = reads %>% 
   gather(var, value, -name, -Category) %>% 
   separate(var, into = c("reader", "type"), sep = ":") %>% 
-  spread(type, value = value)
+  spread(type, value = value) %>% 
+  mutate(id = gsub("-", "", name)) 
+
+v = vars("BleedLocation-Left", "BleedLocation-Right", 
+         "CalvarialFracture", "ChronicBleed", "EDH", "Fracture", "ICH", 
+         "IPH", "IVH", "MassEffect", "MidlineShift", "OtherFracture", 
+         "SAH", "SDH")
+anyone = function(x) {
+  any(x > 0)
+}
+any_reads = reads %>% 
+  group_by(id, Category) %>% 
+  summarise_at(v, sum)
 
 
 bleeds = reads %>% 
@@ -27,9 +39,8 @@ bleeds = bleeds %>%
   distinct()
 
 bleeds = bleeds %>%
-  select(name) %>% 
-  mutate(id = gsub("-", "", name)) %>% 
-  arrange(name) %>% 
+  select(id) %>% 
+  arrange(id) %>% 
   distinct()
 
 df = readr::read_rds("results/directory_df.rds")
@@ -37,21 +48,29 @@ df = df %>%
   mutate(pred_file = file.path("pitch", basename(outfile)),
          out_pred_file = 
            file.path("pitch", paste0(nii.stub(outfile, bn = TRUE),
-                                     "_pitch.nii.gz"),),
+                                     "_pitch.nii.gz")),
          out_prob_file = sub("_pitch", "_prob", out_pred_file)
   )
-df = left_join(bleeds, df)
+df = df %>% 
+  left_join(any_reads %>% 
+              select(id, IPH, IVH)
+              )
+# df = left_join(bleeds, df)
 # df = df[ !file.exists(df$pred_file) & file.exists(df$outfile), ]
 iscen = as.numeric(
   Sys.getenv("SGE_TASK_ID")
 )
 if (is.na(iscen)) {
-  iscen = 1
+  iscen = 216
+  # "nifti/CQ500CT172_CT-Thin-PLAIN.nii.gz" - 216 is chest
 }
 
 
 
 idf = df[iscen,]
+
+# ss = CT_Skull_Strip_smooth("nifti/CQ500CT172_CT-Thin-Plain.nii.gz",
+#                            remove.neck = TRUE, remover = "double_remove_neck")
 
 if (!all(file.exists(idf$pred_file, idf$out_prob_file))) {
   

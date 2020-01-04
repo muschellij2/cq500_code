@@ -1,6 +1,7 @@
 # setwd("~/Desktop/")
 library(neurobase)
 library(extrantsr)
+setwd(here::here())
 
 # img = template$outfile
 # ss = template$ssfile

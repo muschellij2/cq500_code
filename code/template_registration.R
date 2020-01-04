@@ -17,7 +17,7 @@ df = readr::read_rds("results/high_resolution_scans.rds")
 # take out template
 iter = 18
 iter_thresh = 20
-for (iter in 15:30) {
+for (iter in 15:40) {
   print(paste("iter is: ", iter))
   
   out_dir = file.path("template_creation",
@@ -88,7 +88,7 @@ for (iter in 15:30) {
       Sys.getenv("SGE_TASK_ID")
     )
     if (is.na(iscen)) {
-      iscen = 101
+      iscen = 84
     }
     
     idf = df[ iscen, ]

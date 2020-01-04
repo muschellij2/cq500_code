@@ -6,6 +6,7 @@ library(RNifti)
 library(neurobase)
 library(fslr)
 library(here)
+library(ANTsRCore)
 library(extrantsr)
 library(NiftiArray)
 library(DelayedArray)
@@ -18,9 +19,9 @@ df = readr::read_rds("results/high_resolution_scans.rds")
 df$maskfile = sub(".nii", "_Mask.nii", df$ssfile)
 
 # take out template
-iter = 18
+iter = 27
 
-# for (iter in 1:30) {
+for (iter in 1:40) {
   message(paste0("iteration: ", iter))
   out_dir = file.path("template_creation",
                       paste0("iteration_", iter))
@@ -50,8 +51,10 @@ iter = 18
   if (!file.exists(template_average_warp) &
       all(file.exists(df$warp_outfile))) {
     # res = pbapply::pblapply(df$warp_outfile, antsImageRead)
-    average_warps(df$warp_outfile, 
+    avg_warps(df$warp_outfile, 
                   outfile = template_average_warp)
+    # average_warps(df$warp_outfile, 
+    #               outfile = template_average_warp)
   }
   next_template_ss = file.path(out_dir, 
                                "ss.nii.gz")
@@ -96,31 +99,31 @@ iter = 18
       
       timg = neurobase::readnii(df$registered_outfile[1])
       # mat = bigmemory::big.matrix(0.0, nrow = prod(dim(timg)), ncol = nrow(df))
-      # mat = matrix(0.0, nrow = prod(dim(timg)), ncol = nrow(df))
-      # for (i in seq(nrow(df))) {
-      #   x = RNifti::readNifti(df$registered_outfile[i])
-      #   x = c(x)
-      #   mat[,i] = x
-      #   rm(x); gc()
-      #   print(i)
-      # }
-      mat = NiftiArrayList(df$h5_outfile, verbose = TRUE)
-      reshape_matrix = function(res) {
-        dres = dim(res)
-        rl = pbapply::pblapply(seq(dres[3]), function(i) {
-          xx = res[,,i]
-          xx = lapply(seq(dres[2]), function(i) {
-            xx[, i, drop = FALSE]
-          })
-          xx = do.call(DelayedArray::arbind, xx)
-          xx
-        })
-        rl = do.call(DelayedArray::arbind, rl)
+      mat = matrix(0.0, nrow = prod(dim(timg)), ncol = nrow(df))
+      for (i in seq(nrow(df))) {
+        x = RNifti::readNifti(df$registered_outfile[i])
+        x = c(x)
+        mat[,i] = x
+        rm(x); gc()
+        print(i)
       }
-      mat = pbapply::pblapply(mat, reshape_matrix)
+      # mat = NiftiArrayList(df$h5_outfile, verbose = TRUE)
+      # reshape_matrix = function(res) {
+      #   dres = dim(res)
+      #   rl = pbapply::pblapply(seq(dres[3]), function(i) {
+      #     xx = res[,,i]
+      #     xx = lapply(seq(dres[2]), function(i) {
+      #       xx[, i, drop = FALSE]
+      #     })
+      #     xx = do.call(DelayedArray::arbind, xx)
+      #     xx
+      #   })
+      #   rl = do.call(DelayedArray::arbind, rl)
+      # }
+      # mat = pbapply::pblapply(mat, reshape_matrix)
       
       # mat = as(mat, "NiftiArray")
-      mat = as(mat, "NiftiMatrix")
+      # mat = as(mat, "NiftiMatrix")
       message("Getting RowMeans")
       avg_img = rowMeans(mat)
       avg_img = round(avg_img)
@@ -171,4 +174,4 @@ iter = 18
     rm(med_img)    
   }
   
-# }
+}
