@@ -18,8 +18,9 @@ df = tibble::tibble(ind = 2:length(x),
                     ind2 = ind - 1,
                     img = x[2:length(x)])
 df = dplyr::arrange(df, desc(ind))
-df$max_dist = df$rmse = df$dice = NA
+df$max_dist = df$rmse = df$dice2 = df$dice = NA
 df$rmse_masked = df$rmse_masked_intersect = NA
+df$rmse_masked2 = df$rmse_masked_intersect2 = NA
 
 outfile  = file.path("results", 
   paste0("dice_", unique(nii.stub(df$img, bn = TRUE)), ".rds"))
@@ -32,18 +33,24 @@ for (i in 1:nrow(df)) {
   i1 = readNifti(x[[ind1]])
   i2 = readNifti(x[[ind2]])
   mask = i1 != 0  | i2 != 0
+  mask2 = i1 > 5  | i2 > 5
   mask_intersect = i1 != 0 & i2 != 0
+  mask_intersect2 = i1 > 5 & i2 > 5
   d = (i1 - i2)
   df$max_dist[i] = max(abs(d))
   df$rmse[i] = sqrt(mean(d^2))
   df$rmse_masked[i] = sqrt(mean(d[ mask > 0]^2))
   df$rmse_masked_intersect[i] = sqrt(mean(d[ mask_intersect > 0 ]^2))
+  df$rmse_masked_intersect2[i] = sqrt(mean(d[ mask_intersect2 > 0 ]^2))
+  df$rmse_masked2[i] = sqrt(mean(d[ mask2 > 0 ]^2))
   rm(d); for (xx in 1:10) gc()
   dice = fast_dice(i1, i2)
+  dice2 = fast_dice(i1 > 5, i2 > 5)
   rm(i1); for (xx in 1:10) gc()
   rm(i2); for (xx in 1:10) gc()
   
   df$dice[i] = dice
+  df$dice2[i] = dice2
   print(i)
   print(df$rmse[i])
   print(df$rmse_masked[i])

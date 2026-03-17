@@ -10,6 +10,9 @@
 The goal of cq500 is to provide scripts to download and analyze the
 CQ500 dataset: <http://headctstudy.qure.ai/dataset>.
 
+The documentation is now at
+<https://www.kaggle.com/datasets/crawford/qureai-headct>.
+
 Most of the code will be used to download the data, convert the DICOM
 files to NIfTI using [`dcm2niix`](https://github.com/rordenlab/dcm2niix)
 using [`dcm2niir`](https://github.com/muschellij2/dcm2niir), skull

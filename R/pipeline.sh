@@ -8,7 +8,7 @@ Rnosave get_directories.R -N FILES
 Rnosave convert_files.R -N SS -t 1-${n}
 
 Rnosave n4.R -N N4 -hold_jid_ad SS \
-	-t 1-${n} -l mem_free=15G,h_vmem=16G
+  -t 1-${n} -l mem_free=15G,h_vmem=16G
 
 # Rnosave n4.R -N N4 -hold_jid_ad SS \
 # 	-l mem_free=30G,h_vmem=32G \

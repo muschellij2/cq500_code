@@ -17,7 +17,7 @@ df = readr::read_rds("results/high_resolution_scans.rds")
 # take out template
 iter = 18
 iter_thresh = 20
-for (iter in 15:40) {
+for (iter in 15:45) {
   print(paste("iter is: ", iter))
   
   out_dir = file.path("template_creation",

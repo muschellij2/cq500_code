@@ -21,7 +21,7 @@ df$maskfile = sub(".nii", "_Mask.nii", df$ssfile)
 # take out template
 iter = 27
 
-for (iter in 1:40) {
+for (iter in 1:45) {
   message(paste0("iteration: ", iter))
   out_dir = file.path("template_creation",
                       paste0("iteration_", iter))
