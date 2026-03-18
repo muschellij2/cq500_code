@@ -143,7 +143,7 @@ write_rds(df, here::here("data", "dicom_filenames.rds"))
 
 
 df_study = df %>%
-  select(id_patient, id_patient_short, num_patient_short,
+  select(id_patient, type, id_patient_short, num_patient_short,
          id_study, dir_study, dir_series, fold,
          starts_with("file_")) %>%
   distinct()
