@@ -150,25 +150,25 @@ df_study = df %>%
 write_rds(df_study, here::here("data", "dicom_study_filenames.rds"))
 
 
-wide = df_study %>%
-  select(starts_with("id"), fold, dir_study,
-         dir_series, file_nifti, 
-         file_ss, 
-         file_image_nifti, file_image_ss) %>%
-  pivot_wider(names_from = type,
-              values_from = c(dir_series, file_nifti, 
-                              file_ss, 
-                              file_image_nifti, file_image_ss))
-wide = wide %>%
-  select(-file_ss_roi, -file_coreg_transforms_roi,
-         -file_image_nifti_roi,
-         -file_image_ss_roi)
-wide = wide %>%
-  rename(
-    file_ss = file_ss_ct,
-    file_coreg_transforms = file_coreg_transforms_ct,
-    file_image_nifti = file_image_nifti_ct,
-    file_image_ss = file_image_ss_ct,
-  )
-write_rds(wide, here::here("data", "dicom_study_filenames_wide.rds"))
+# wide = df_study %>%
+#   select(starts_with("id"), fold, dir_study, type,
+#          dir_series, file_nifti, 
+#          file_ss, 
+#          file_image_nifti, file_image_ss) %>%
+#   pivot_wider(names_from = type,
+#               values_from = c(dir_series, file_nifti, 
+#                               file_ss, 
+#                               file_image_nifti, file_image_ss))
+# wide = wide %>%
+#   select(-file_ss_roi, -file_coreg_transforms_roi,
+#          -file_image_nifti_roi,
+#          -file_image_ss_roi)
+# wide = wide %>%
+#   rename(
+#     file_ss = file_ss_ct,
+#     file_coreg_transforms = file_coreg_transforms_ct,
+#     file_image_nifti = file_image_nifti_ct,
+#     file_image_ss = file_image_ss_ct,
+#   )
+# write_rds(wide, here::here("data", "dicom_study_filenames_wide.rds"))
 
