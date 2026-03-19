@@ -7,3 +7,6 @@ code/cq500_files.txt
 data
 results
 raw_data
+eofiles
+*.out
+*.err
