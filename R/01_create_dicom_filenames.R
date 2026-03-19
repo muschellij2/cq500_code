@@ -139,6 +139,13 @@ id_df = df %>%
 df = left_join(df, id_df)
 df = df %>% 
   mutate(type = "ct")
+df = df %>%
+  mutate(
+    file_header = nii.stub(file_nifti, bn = TRUE),
+    file_header = paste0(file_header, ".rds"),
+    file_header = here::here(dir_header, file_header),
+    file_header_wide = sub("/header/", "/header_wide/", file_header)
+  )
 write_rds(df, here::here("data", "dicom_filenames.rds"))
 
 
