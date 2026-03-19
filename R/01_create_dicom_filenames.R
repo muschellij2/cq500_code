@@ -139,6 +139,10 @@ id_df = df %>%
 df = left_join(df, id_df)
 df = df %>% 
   mutate(type = "ct")
+
+dir_header = here::here("data", "header")
+dir_header_wide = here::here("data", "header_wide")
+fs::dir_create(c(dir_header, dir_header_wide))
 df = df %>%
   mutate(
     file_header = neurobase::nii.stub(file_nifti, bn = TRUE),
