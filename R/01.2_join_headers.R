@@ -8,17 +8,6 @@ dir_header = here::here("data", "header")
 dir_header_wide = here::here("data", "header_wide")
 
 
-df = df %>%
-  filter(type == "ct") %>%
-  mutate(
-    file_header = nii.stub(file_nifti, bn = TRUE),
-    # file_header = gsub("/", "_", dirname(file_relative_path)),
-    # file_header = gsub(" ", "_", file_header),
-    file_header = paste0(file_header, ".rds"),
-    file_header = here::here(dir_header, file_header),
-    file_header_wide = sub("/header/", "/header_wide/", file_header)
-  )
-
 iid = 1
 
 df = df %>%
