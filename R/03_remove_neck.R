@@ -56,24 +56,25 @@ if (!all(file.exists(c(file_noneck, file_mask_neck)))) {
   
   reorient = FALSE
   
-  img = check_nifti(img, reorient = reorient)
-  thresh_img = niftiarr(img, img * (img > lthresh & img < uthresh))
+  img = readnii(img)
+  thresh_img = mask_img(img, (img > lthresh & img < uthresh))
+  message("Image thresholded")
   if (!any(c(thresh_img) > 0)) {
     stop("No positive values in the thresholded output!")
   }
-  thresh_img = oro.nifti::drop_img_dim(thresh_img)
-  thresh = neurobase::checkimg(thresh_img)
-  rm(thresh_img)
   remover = "remove_neck"
   verbose = TRUE
   if (verbose) {
     message(paste0("# Removing Neck\n"))
   }
-  L = list(file = thresh, 
+  L = list(file = thresh_img, 
            template.file = ss.template.file, 
-           template.mask = ss.template.mask, rep.value = 0, verbose = verbose, 
+           template.mask = ss.template.mask, 
+           rep.value = 0, 
+           verbose = verbose, 
            ret_mask = TRUE, swapdim = TRUE)
-  neck_mask = do.call(remover, args = L)
+  message("List created")
+  neck_mask = do.call(remover, args = L) > 0
   neurobase::writenii(neck_mask, file_mask_neck)
   
   add_value = 1024
