@@ -13,7 +13,7 @@ id_df = id_df %>%
   mutate(id_patient_short = sub("CQ500CT", "", id_patient),
          num_patient_short = as.numeric(id_patient_short)) %>% 
   relocate(id_patient, id_patient_short, num_patient_short, .before = name)
-  
+
 
 #### Create DICOM Filename df
 dir_dicom = here::here("data", "dicom")
@@ -96,22 +96,35 @@ stopifnot(length(bad_ids) == 0)
 
 
 #### Naming NIfTIs ####
-
 dirs_to_create = c("nifti", 
-                   "brain_extracted", "brain_mask")
+                   "brain_extracted", "brain_mask",
+                   "brain_extracted_brainchop", "brain_mask_brainchop",
+                   "brain_extracted_hdctbet", "brain_mask_hdctbet",
+                   "brain_extracted_synth", "brain_mask_synth",
+                   "brain_mask_ctbet", "brain_extracted_ctbet",
+                   "brain_extracted_original", "brain_mask_original",
+                   "header", "header_wide",
+                   "nifti_256", "nifti_512",
+                   "noneck", "neck_mask"
+)
+
 dirs = here::here("data", dirs_to_create)
 fs::dir_create(dirs)
 names(dirs) = dirs_to_create
+
 rs_dirs_to_create = c("image_nifti", "image_ss")
 rs_dirs = here::here("results", rs_dirs_to_create)
 names(rs_dirs) = rs_dirs_to_create
+
 dirs = as.list(dirs)
 dirs = c(dirs, as.list(rs_dirs))
 
 df = df %>%
   mutate(
     fname = paste0(stub, ".nii.gz"),
-    file_nifti = file.path(dirs$nifti, fname)
+    file_nifti = file.path(dirs$nifti, fname),
+    file_nifti_256 = file.path(dirs$nifti_256, fname),
+    file_nifti_512 = file.path(dirs$nifti_512, fname),
   ) %>%
   select(-fname)
 
@@ -123,6 +136,22 @@ df = df %>%
     base_stub = stub,
     file_ss = here::here(dirs$brain_extracted, base_stub),
     file_mask = here::here(dirs$brain_mask, base_stub),
+    
+    file_ss_brainchop = here::here(dirs$brain_extracted_brainchop, base_stub),
+    file_mask_brainchop = here::here(dirs$brain_mask_brainchop, base_stub),
+    
+    file_ss_original = here::here(dirs$brain_extracted_original, stub),
+    file_mask_original = here::here(dirs$brain_mask_original, stub),
+    
+    file_ss_hdctbet = here::here(dirs$brain_extracted_hdctbet, stub),
+    file_mask_hdctbet = here::here(dirs$brain_mask_hdctbet, stub),
+    
+    
+    file_ss_synth = here::here(dirs$brain_extracted_synth, stub),
+    file_mask_synth = here::here(dirs$brain_mask_synth, stub),
+    
+    file_noneck = here::here(dir_noneck, stub),
+    file_mask_neck = here::here(dir_mask_neck, stub),
     
     png = paste0(neurobase::nii.stub(base_stub), ".png"),
     png = ifelse(is.na(base_stub), NA_character_, png),
