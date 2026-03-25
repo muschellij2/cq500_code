@@ -15,9 +15,9 @@ iid = get_fold()
 print(iid)
 idf = df[iid,]
 
-file_nifti = idf$file_nifti
-file_mask_neck = idf$file_mask_neck
-file_noneck = idf$file_noneck
+file_nifti = idf$file_nifti_512
+file_mask_neck = idf$file_mask_neck_512
+file_noneck = idf$file_noneck_512
 
 if (!all(file.exists(c(file_noneck, file_mask_neck)))) {
   ss.template.file =
