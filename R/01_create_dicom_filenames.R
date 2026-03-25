@@ -150,8 +150,8 @@ df = df %>%
     file_ss_synth = here::here(dirs$brain_extracted_synth, stub),
     file_mask_synth = here::here(dirs$brain_mask_synth, stub),
     
-    file_noneck = here::here(dir_noneck, stub),
-    file_mask_neck = here::here(dir_mask_neck, stub),
+    file_noneck = here::here(dirs$noneck, stub),
+    file_mask_neck = here::here(dirs$neck_mask, stub),
     
     png = paste0(neurobase::nii.stub(base_stub), ".png"),
     png = ifelse(is.na(base_stub), NA_character_, png),
