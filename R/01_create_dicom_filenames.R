@@ -168,7 +168,7 @@ df = df %>%
     file_ss_synth = here::here(dirs$brain_extracted_synth, stub),
     file_mask_synth = here::here(dirs$brain_mask_synth, stub),
     
-  
+    # 512
     file_ss_512 = here::here(dirs$brain_extracted_512, base_stub),
     file_mask_512 = here::here(dirs$brain_mask_512, base_stub),
     
@@ -181,26 +181,24 @@ df = df %>%
     file_ss_hdctbet_512 = here::here(dirs$brain_extracted_hdctbet_512, stub),
     file_mask_hdctbet_512 = here::here(dirs$brain_mask_hdctbet_512, stub),
     
-    
     file_ss_synth_512 = here::here(dirs$brain_extracted_synth_512, stub),
     file_mask_synth_512 = here::here(dirs$brain_mask_synth_512, stub),
     
+    # 512 and noneck
+    file_ss_512_noneck = here::here(dirs$noneck_brain_extracted_512, base_stub),
+    file_mask_512_noneck = here::here(dirs$noneck_brain_mask_512, base_stub),
     
-    file_noneck_ss_512 = here::here(dirs$noneck_brain_extracted_512, base_stub),
-    file_noneck_mask_512 = here::here(dirs$noneck_brain_mask_512, base_stub),
+    file_ss_brainchop_512_noneck = here::here(dirs$noneck_brain_extracted_brainchop_512, base_stub),
+    file_mask_brainchop_512_noneck = here::here(dirs$noneck_brain_mask_brainchop_512, base_stub),
     
-    file_noneck_ss_brainchop_512 = here::here(dirs$noneck_brain_extracted_brainchop_512, base_stub),
-    file_noneck_mask_brainchop_512 = here::here(dirs$noneck_brain_mask_brainchop_512, base_stub),
+    file_ss_original_512_noneck = here::here(dirs$noneck_brain_extracted_original_512, stub),
+    file_mask_original_512_noneck = here::here(dirs$noneck_brain_mask_original_512, stub),
     
-    file_noneck_ss_original_512 = here::here(dirs$noneck_brain_extracted_original_512, stub),
-    file_noneck_mask_original_512 = here::here(dirs$noneck_brain_mask_original_512, stub),
+    file_ss_hdctbet_512_noneck = here::here(dirs$noneck_brain_extracted_hdctbet_512, stub),
+    file_mask_hdctbet_512_noneck = here::here(dirs$noneck_brain_mask_hdctbet_512, stub),
     
-    file_noneck_ss_hdctbet_512 = here::here(dirs$noneck_brain_extracted_hdctbet_512, stub),
-    file_noneck_mask_hdctbet_512 = here::here(dirs$noneck_brain_mask_hdctbet_512, stub),
-    
-    
-    file_noneck_ss_synth_512 = here::here(dirs$noneck_brain_extracted_synth_512, stub),
-    file_noneck_mask_synth_512 = here::here(dirs$noneck_brain_mask_synth_512, stub),
+    file_ss_synth_512_noneck = here::here(dirs$noneck_brain_extracted_synth_512, stub),
+    file_mask_synth_512_noneck = here::here(dirs$noneck_brain_mask_synth_512, stub),
     
     
     file_noneck = here::here(dirs$noneck, stub),
