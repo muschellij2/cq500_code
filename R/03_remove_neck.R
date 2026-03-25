@@ -8,29 +8,6 @@ library(extrantsr)
 source(here::here("R/utils.R"))
 df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
 
-# df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
-dir_noneck = here::here("data", "noneck")
-dir_mask_neck = here::here("data", "neck_mask")
-
-
-fs::dir_create(
-  c(
-    dir_noneck,
-    dir_mask_neck
-  )
-)
-
-df = df %>%
-  filter(type == "ct") %>%
-  mutate(
-    stub = basename(file_nifti),
-    id_patient = sub("_.*", "", stub),
-    file_noneck = here::here(dir_noneck, stub),
-    file_mask_neck = here::here(dir_mask_neck, stub),
-    
-  ) %>%
-  select(-stub) %>%
-  mutate(id = sub("_(ct|roi)", "", nii.stub(file_nifti, bn = TRUE) ))
 
 iid = get_fold()
 

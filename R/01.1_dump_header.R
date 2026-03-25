@@ -12,14 +12,13 @@ library(neurobase)
 source(here::here("R/utils.R"))
 df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
 
-dir_header = here::here("data", "header")
-dir_header_wide = here::here("data", "header_wide")
-fs::dir_create(c(dir_header, dir_header_wide))
+
 
 
 bad = df %>%
   filter(!file.exists(file_header) & file.exists(file_header_wide))
 iid = 1
+# iid = 65
 
 for (iid in seq(nrow(df))) {
   idf = df[iid,]

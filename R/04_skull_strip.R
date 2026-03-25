@@ -7,52 +7,6 @@ library(freesurfer)
 source(here::here("R/utils.R"))
 df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
 
-# df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
-dir_ss = here::here("data", "brain_extracted")
-dir_mask = here::here("data", "brain_mask")
-
-dir_ss_synth = here::here("data", "brain_extracted_synth")
-dir_mask_synth = here::here("data", "brain_mask_synth")
-
-dir_mask_hdctbet = here::here("data", "brain_mask_hdctbet")
-dir_ss_hdctbet = here::here("data", "brain_extracted_hdctbet")
-
-dir_mask_ctbet = here::here("data", "brain_mask_ctbet")
-dir_ss_ctbet = here::here("data", "brain_extracted_ctbet")
-# dir_ss_hdctbet = here::here("CT_BET", "predictions")
-
-dir_ss_original = here::here("data", "brain_extracted_original")
-dir_mask_original = here::here("data", "brain_mask_original")
-
-fs::dir_create(
-  c(
-    dir_ss,
-    dir_mask,
-    dir_ss_synth,
-    dir_mask_synth,
-    dir_ss_original,
-    dir_mask_original
-  )
-)
-
-df = df %>%
-  filter(type == "ct") %>%
-  mutate(
-    stub = basename(file_nifti),
-    id_patient = sub("_.*", "", stub),
-    file_ss = here::here(dir_ss, stub),
-    file_mask = here::here(dir_mask, stub),
-    file_ss_original = here::here(dir_ss_original, stub),
-    file_mask_original = here::here(dir_mask_original, stub),
-
-    file_ss_hdctbet = here::here(dir_ss_hdctbet, stub),
-
-    file_ss_synth = here::here(dir_ss_synth, stub),
-    file_mask_synth = here::here(dir_mask_synth, stub)
-
-  ) %>%
-  select(-stub) %>%
-  mutate(id = sub("_(ct|roi)", "", nii.stub(file_nifti, bn = TRUE) ))
 
 iid = get_fold()
 

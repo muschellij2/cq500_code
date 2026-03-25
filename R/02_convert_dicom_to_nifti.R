@@ -20,11 +20,15 @@ df = df %>%
 iid = 1
 all_bad = NULL
 print(nrow(df))
+
+df = df %>% 
+  filter(!file.exists(file_nifti))
+
 for (iid in seq(nrow(df))) {
   print(iid)
   idf = df[iid,]
   print(idf$dir_series)
-
+  
   dir_series = idf$dir_series
   file_nifti = idf$file_nifti
   type = idf$type
@@ -41,13 +45,24 @@ for (iid in seq(nrow(df))) {
     if (length(dim(res)) != 3 || inherits(res, "try-error")) {
       message("Bad: ", dir_series)
       all_bad = c(all_bad, dir_series)
+      res = try({
+        ct_dcm2nii(basedir = dir_series,
+                   verbose = FALSE,
+                   dcm2niicmd = "dcm2niix_feb2024",
+                   ignore_roi_if_multiple = TRUE,
+                   fail_on_error = FALSE)
+      })
+      if (length(dim(res)) != 3 || inherits(res, "try-error")) {
+        message("New dcm2niix did not fix")
+        all_bad = unique(all_bad)
         next
+      }
     }
     # write file to disk
     writenii(res, file_nifti)
   } else {
     # res = readnii(file_nifti, drop_dim = FALSE)
   }
-
+  
 }
 print(all_bad)
