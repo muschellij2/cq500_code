@@ -111,6 +111,14 @@ dirs_to_create = c("nifti",
                    "brain_mask_ctbet_512", "brain_extracted_ctbet_512",
                    "brain_extracted_original_512", "brain_mask_original_512",
                    
+                   
+                   "noneck_brain_extracted_512", "noneck_brain_mask_512",
+                   "noneck_brain_extracted_brainchop_512", "noneck_brain_mask_brainchop_512",
+                   "noneck_brain_extracted_hdctbet_512", "noneck_brain_mask_hdctbet_512",
+                   "noneck_brain_extracted_synth_512", "noneck_brain_mask_synth_512",
+                   "noneck_brain_mask_ctbet_512", "noneck_brain_extracted_ctbet_512",
+                   "noneck_brain_extracted_original_512", "noneck_brain_mask_original_512",
+                   
                    "header", "header_wide",
                    "nifti_256", "nifti_512",
                    "noneck", "neck_mask",
@@ -176,6 +184,23 @@ df = df %>%
     
     file_ss_synth_512 = here::here(dirs$brain_extracted_synth_512, stub),
     file_mask_synth_512 = here::here(dirs$brain_mask_synth_512, stub),
+    
+    
+    file_noneck_ss_512 = here::here(dirs$noneck_brain_extracted_512, base_stub),
+    file_noneck_mask_512 = here::here(dirs$noneck_brain_mask_512, base_stub),
+    
+    file_noneck_ss_brainchop_512 = here::here(dirs$noneck_brain_extracted_brainchop_512, base_stub),
+    file_noneck_mask_brainchop_512 = here::here(dirs$noneck_brain_mask_brainchop_512, base_stub),
+    
+    file_noneck_ss_original_512 = here::here(dirs$noneck_brain_extracted_original_512, stub),
+    file_noneck_mask_original_512 = here::here(dirs$noneck_brain_mask_original_512, stub),
+    
+    file_noneck_ss_hdctbet_512 = here::here(dirs$noneck_brain_extracted_hdctbet_512, stub),
+    file_noneck_mask_hdctbet_512 = here::here(dirs$noneck_brain_mask_hdctbet_512, stub),
+    
+    
+    file_noneck_ss_synth_512 = here::here(dirs$noneck_brain_extracted_synth_512, stub),
+    file_noneck_mask_synth_512 = here::here(dirs$noneck_brain_mask_synth_512, stub),
     
     
     file_noneck = here::here(dirs$noneck, stub),
