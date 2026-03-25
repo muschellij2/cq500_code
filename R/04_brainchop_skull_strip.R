@@ -4,37 +4,8 @@ library(tibble)
 library(dplyr)
 library(fs)
 source(here::here("R/utils.R"))
-df = tibble(
-  file_nifti = list.files(
-    path = here::here("data", "nifti"),
-    recursive = TRUE,
-    pattern = "_ct.nii.gz",
-    full.names = TRUE),
-  type = "ct"
-)
-# df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
-dir_ss = here::here("data", "brain_extracted_brainchop")
-dir_mask = here::here("data", "brain_mask_brainchop")
+df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
 
-
-
-fs::dir_create(
-  c(
-    dir_ss,
-    dir_mask
-  )
-)
-
-df = df %>%
-  filter(type == "ct") %>%
-  mutate(
-    stub = basename(file_nifti),
-    id_patient = sub("_.*", "", stub),
-    file_ss = here::here(dir_ss, stub),
-    file_mask = here::here(dir_mask, stub)
-  ) %>%
-  select(-stub) %>%
-  mutate(id = sub("_(ct|roi)", "", nii.stub(file_nifti, bn = TRUE) ))
 
 iid = get_fold()
 
