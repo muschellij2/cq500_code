@@ -105,7 +105,9 @@ dirs_to_create = c("nifti",
                    "brain_extracted_original", "brain_mask_original",
                    "header", "header_wide",
                    "nifti_256", "nifti_512",
-                   "noneck", "neck_mask"
+                   "noneck", "neck_mask",
+                   "noneck_512", "neck_mask_512",
+                   "noneck_256", "neck_mask_256"
 )
 
 dirs = here::here("data", dirs_to_create)
@@ -152,6 +154,12 @@ df = df %>%
     
     file_noneck = here::here(dirs$noneck, stub),
     file_mask_neck = here::here(dirs$neck_mask, stub),
+    
+    file_noneck_512 = here::here(dirs$noneck_512, stub),
+    file_mask_neck_512 = here::here(dirs$neck_mask_512, stub),
+    
+    file_noneck_256 = here::here(dirs$noneck_256, stub),
+    file_mask_neck_256 = here::here(dirs$neck_mask_256, stub),
     
     png = paste0(neurobase::nii.stub(base_stub), ".png"),
     png = ifelse(is.na(base_stub), NA_character_, png),
