@@ -7,22 +7,23 @@ library(freesurfer)
 source(here::here("R/utils.R"))
 df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
 
-
+# mode = ""
+mode = "_512"
 iid = get_fold()
 
 # for (iid in seq(nrow(df))) {
 print(iid)
 idf = df[iid,]
 
-file_nifti = idf$file_nifti
-file_mask = idf$file_mask
-file_ss = idf$file_ss
+file_nifti = idf[[paste0("file_nifti", mode)]]
+file_mask = idf[[paste0("file_mask", mode)]]
+file_ss = idf[[paste0("file_ss", mode)]]
 
-file_mask_original = idf$file_mask_original
-file_ss_original = idf$file_ss_original
+file_mask_original = idf[[paste0("file_mask_original", mode)]]
+file_ss_original = idf[[paste0("file_ss_original", mode)]]
 
-file_mask_synth = idf$file_mask_synth
-file_ss_synth = idf$file_ss_synth
+file_mask_synth = idf[[paste0("file_mask_synth", mode)]]
+file_ss_synth = idf[[paste0("file_ss_synth", mode)]]
 
 if (!all(file.exists(c(file_ss, file_mask)))) {
   ss.template.file =
