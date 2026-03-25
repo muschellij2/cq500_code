@@ -201,13 +201,13 @@ df = df %>%
     file_mask_synth_512_noneck = here::here(dirs$noneck_brain_mask_synth_512, stub),
     
     
-    file_noneck = here::here(dirs$noneck, stub),
+    file_nifti_noneck = here::here(dirs$noneck, stub),
     file_mask_neck = here::here(dirs$neck_mask, stub),
     
-    file_noneck_512 = here::here(dirs$noneck_512, stub),
+    file_nifti_512_noneck = here::here(dirs$noneck_512, stub),
     file_mask_neck_512 = here::here(dirs$neck_mask_512, stub),
     
-    file_noneck_256 = here::here(dirs$noneck_256, stub),
+    file_nifti_256_noneck = here::here(dirs$noneck_256, stub),
     file_mask_neck_256 = here::here(dirs$neck_mask_256, stub),
     
     png = paste0(neurobase::nii.stub(base_stub), ".png"),
