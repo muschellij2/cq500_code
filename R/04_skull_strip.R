@@ -8,7 +8,8 @@ source(here::here("R/utils.R"))
 df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
 
 # mode = ""
-mode = "_512"
+# mode = "_512"
+mode = "_512_noneck"
 iid = get_fold()
 
 # for (iid in seq(nrow(df))) {
