@@ -9,11 +9,15 @@ source(here::here("R/utils.R"))
 df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
 
 
-iid = get_fold()
 
 mode = "_512"
-mode = ""
+# mode = ""
+files = df[[paste0("file_mask_neck", mode)]]
+
+
 iid = get_fold()
+
+
 
 # for (iid in seq(nrow(df))) {
 print(iid)
@@ -24,10 +28,6 @@ file_nifti = idf[[paste0("file_nifti", mode)]]
 file_mask_neck = idf[[paste0("file_mask_neck", mode)]]
 file_noneck = idf[[paste0("file_nifti", mode, "_noneck")]]
 
-file_nifti = idf$file_nifti_512
-# idf$file_mask_512_noneck is brain mask for noneck 512 case
-file_mask_neck = idf$file_mask_neck_512
-file_noneck = idf$file_nifti_512_noneck
 
 if (!all(file.exists(c(file_noneck, file_mask_neck)))) {
   ss.template.file =
@@ -66,5 +66,5 @@ if (!all(file.exists(c(file_noneck, file_mask_neck)))) {
   
   add_value = 1024
   noneck = mask_img(img + add_value, neck_mask) - add_value
-  neurobase::writenii(neck_mask, file_noneck)
+  neurobase::writenii(noneck, file_noneck)
 }
