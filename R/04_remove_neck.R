@@ -10,8 +10,8 @@ df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
 
 
 
-mode = "_512"
-# mode = ""
+# mode = "_512"
+mode = ""
 files = df[[paste0("file_mask_neck", mode)]]
 
 
