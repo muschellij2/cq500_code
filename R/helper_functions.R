@@ -29,8 +29,7 @@ create_overlay = function(img, roi) {
   pngname
 }
 
-create_ortho = function(img, roi, dir_study) {
-  pngname = tempfile(fileext = ".png")
+create_ortho = function(img, roi, dir_study, pngname = tempfile(fileext = ".png")) {
   png(pngname, res = 300, height = 5, width = 5, units = "in")
   on.exit({
     try(dev.off(), silent = TRUE)
