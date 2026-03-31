@@ -15,21 +15,20 @@ df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
 print(nrow(df))
 
 
-mode = "_512_noneck"
 iid = get_fold()
 
 # df = df[1:100,]
-# for (iid in seq(nrow(df))) {
+for (iid in seq(nrow(df))) {
   print(iid)
   idf = df[iid,]
-
+  
   file_nifti = idf$file_nifti_512
   file_neck_mask = idf$file_mask_neck_512
   
   file_image_nifti = idf$file_image_nifti
   dir_study = nii.stub(idf$file_nifti, bn = TRUE)
   dir_study = gsub("_", "\n", dir_study)
-
+  
   if (!file.exists(file_image_nifti) &&
       file.exists(file_neck_mask)) {
     img = readnii(file_nifti)
@@ -49,5 +48,5 @@ iid = get_fold()
   } else {
     # res = readnii(file_nifti, drop_dim = FALSE)
   }
-
-# }
+  
+}
