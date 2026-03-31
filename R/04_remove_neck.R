@@ -22,12 +22,14 @@ iid = get_fold()
 # for (iid in seq(nrow(df))) {
 print(iid)
 idf = df[iid,]
-
+print(idf)
 
 file_nifti = idf[[paste0("file_nifti", mode)]]
 file_mask_neck = idf[[paste0("file_mask_neck", mode)]]
 file_noneck = idf[[paste0("file_nifti", mode, "_noneck")]]
 
+print(file_nifti)
+print(file_noneck)
 
 if (!all(file.exists(c(file_noneck, file_mask_neck)))) {
   ss.template.file =
