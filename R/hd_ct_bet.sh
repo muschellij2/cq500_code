@@ -16,9 +16,18 @@ files=`ls data/noneck_512/*.nii.gz`
 outdir="data/noneck_brain_extracted_hdctbet_512"
 mkdir -p ${outdir}
 
+if [ -n "$CUDA_VISIBLE_DEVICES" ]; then
+    GPU_ID=${CUDA_VISIBLE_DEVICES%%,*}
+    EXTRA_ARGS="-device $GPU_ID"
+else
+    EXTRA_ARGS=""
+fi
+
+echo "EXTRA_ARGS are ${EXTRA_ARGS}"
+
 conda activate hd_ctbet
 for ifile in $files;
 do
   bn=`basename ${ifile}`
-  ./HD-CTBET/HD_CTBET/hd-ctbet -i ${ifile} -o "${outdir}/${bn}"
+  ./HD-CTBET/HD_CTBET/hd-ctbet -i ${ifile} -o "${outdir}/${bn}" ${EXTRA_ARGS}
 done
