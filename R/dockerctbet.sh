@@ -3,7 +3,7 @@
 #SBATCH --partition=gpu          # <-- only GPU workloads belong here
 #SBATCH --gres=gpu:1             # 1 GPU; change to :2, :4 … if the code scales
 #SBATCH --cpus-per-task=4        # threads available to PyTorch / nnUNet
-#SBATCH --mem=12G
+#SBATCH --mem=40G
 #SBATCH --time=1-00:00:00
 #SBATCH --output=eofiles/DOCKERBET_%A.out
 #SBATCH --error=eofiles/DOCKERBET_%A.err
