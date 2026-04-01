@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=CTBET
 #SBATCH --time=4-00:00:00
-#SBATCH --output=CTBET_%A.out
-#SBATCH --error=CTBET_%A.err
+#SBATCH --output=eofiles/CPUCTBET_%A.out
+#SBATCH --error=eofiles/CPUCTBET_%A.err
 
 source ~/.bash_profile
 module unload conda_R

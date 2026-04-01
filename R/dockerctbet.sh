@@ -5,8 +5,8 @@
 #SBATCH --cpus-per-task=4        # threads available to PyTorch / nnUNet
 #SBATCH --mem=12G
 #SBATCH --time=1-00:00:00
-#SBATCH --output=DOCKERBET_%A.out
-#SBATCH --error=DOCKERBET_%A.err
+#SBATCH --output=eofiles/DOCKERBET_%A.out
+#SBATCH --error=eofiles/DOCKERBET_%A.err
 
 source ~/.bash_profile
 module unload conda_R
