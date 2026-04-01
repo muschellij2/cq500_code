@@ -20,5 +20,5 @@ conda activate hd_ctbet
 for ifile in $files;
 do
   bn=`basename ${ifile}`
-  ./HD-CTBET/HD_CTBET/hd-ctbet -i ${ifile} -o "${outdir}/${bn}"
+  $mistie_3/HD-CTBET/HD_CTBET/hd-ctbet -i ${ifile} -o "${outdir}/${bn}"
 done
