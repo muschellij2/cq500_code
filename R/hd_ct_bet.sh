@@ -29,5 +29,8 @@ conda activate hd_ctbet
 for ifile in $files;
 do
   bn=`basename ${ifile}`
+  if [[ ! -f "${outdir}/${bn}" ]];
+  then
   ./HD-CTBET/HD_CTBET/hd-ctbet -i ${ifile} -o "${outdir}/${bn}" ${EXTRA_ARGS}
+  fi
 done
