@@ -4,7 +4,7 @@
 #SBATCH --gres=gpu:1             # 1 GPU; change to :2, :4 … if the code scales
 #SBATCH --cpus-per-task=4        # threads available to PyTorch / nnUNet
 #SBATCH --mem=12G
-#SBATCH --time=4-00:00:00
+#SBATCH --time=1-00:00:00
 #SBATCH --output=eofiles/HDCTBET_%A.out
 #SBATCH --error=eofiles/HDCTBET_%A.err
 
