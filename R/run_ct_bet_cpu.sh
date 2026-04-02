@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=CTBET
+#SBATCH --job-name=CPUCTBET
 #SBATCH --time=4-00:00:00
 #SBATCH --output=eofiles/CPUCTBET_%A.out
 #SBATCH --error=eofiles/CPUCTBET_%A.err
