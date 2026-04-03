@@ -25,11 +25,12 @@ module load conda
 conda activate brainchop_env
 cd $cq500
 
-files=`ls data/noneck_512/*.nii.gz`
+size=256
+files=`ls data/noneck_${size}/*.nii.gz`
 ifile=${files}
-brain_outdir="data/noneck_brain_extracted_brainchop_512"
+brain_outdir="data/noneck_brain_extracted_brainchop_${size}"
 mkdir -p ${brain_outdir}
-mask_outdir="data/noneck_brain_mask_brainchop_512"
+mask_outdir="data/noneck_brain_mask_brainchop_${size}"
 mkdir -p ${mask_outdir}
 
 
