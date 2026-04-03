@@ -70,3 +70,14 @@ if (!all(file.exists(c(file_noneck, file_mask_neck)))) {
   noneck = mask_img(img + add_value, neck_mask) - add_value
   neurobase::writenii(noneck, file_noneck)
 }
+
+
+if (
+  grepl("512", mode) && !file.exists(idf$file_nifti_256_noneck)
+) {
+  res = resample_image(idf$file_nifti_512_noneck, 
+                       parameters = c(256L, 256L, 256L),
+                       parameter_type = "voxels", 
+                       interpolator = "nearestneighbor")
+  neurobase::writenii(res, idf$file_nifti_256_noneck)
+}
