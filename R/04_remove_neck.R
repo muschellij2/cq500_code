@@ -31,7 +31,10 @@ file_noneck = idf[[paste0("file_nifti", mode, "_noneck")]]
 print(file_nifti)
 print(file_noneck)
 
-if (!all(file.exists(c(file_noneck, file_mask_neck)))) {
+if (
+  !all(file.exists(c(file_noneck, file_mask_neck))) &&
+  file.exists(idf$file_nifti)
+    ) {
   ss.template.file =
     system.file("scct_unsmooth_SS_0.01.nii.gz",
                 package = "ichseg")
@@ -73,7 +76,9 @@ if (!all(file.exists(c(file_noneck, file_mask_neck)))) {
 
 
 if (
-  grepl("512", mode) && !file.exists(idf$file_nifti_256_noneck)
+  grepl("512", mode) && 
+  !file.exists(idf$file_nifti_256_noneck) &&
+  file.exists(idf$file_nifti_512_noneck)
 ) {
   message("Resampling data")
   res = resample_image(idf$file_nifti_512_noneck, 
