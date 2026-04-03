@@ -75,6 +75,7 @@ if (!all(file.exists(c(file_noneck, file_mask_neck)))) {
 if (
   grepl("512", mode) && !file.exists(idf$file_nifti_256_noneck)
 ) {
+  message("Resampling data")
   res = resample_image(idf$file_nifti_512_noneck, 
                        parameters = c(256L, 256L, 256L),
                        parameter_type = "voxels", 
