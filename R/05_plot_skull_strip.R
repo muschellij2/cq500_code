@@ -50,7 +50,10 @@ iid = get_fold()
 print(iid)
 idf = df[iid,]
 
+
 file_nifti = idf$file_nifti
+print(file_nifti)
+print(data)
 data = idf$data[[1]]
 if (any(file_empty(data$png))) {
   img = window_img(file_nifti)
