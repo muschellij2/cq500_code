@@ -53,12 +53,13 @@ idf = df[iid,]
 
 file_nifti = idf$file_nifti
 print(file_nifti)
-print(data)
 data = idf$data[[1]]
+print(data)
 if (any(file_empty(data$png))) {
   img = window_img(file_nifti)
   iimg = 1
   for (iimg in seq(nrow(data))) {
+    print(iimg)
     file_mask = data$file_mask[iimg]
     pngname = data$png[iimg]
     stub = data$stub[iimg]
