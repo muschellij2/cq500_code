@@ -32,6 +32,7 @@ df = df %>%
     stub = nii.stub(file_nifti, bn = TRUE),
     png = here::here("results", basename(dir), paste0(stub, ".png"))
   )
+dir.create(unique(dirname(df$png)), recursive = TRUE, showWarnings = FALSE)
 df = df %>% 
   select(file_nifti, file_mask, stub, png) 
 df = df %>% 
