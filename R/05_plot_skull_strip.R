@@ -5,6 +5,7 @@ library(fs)
 source(here::here("R/utils.R"))
 source(here::here("R/helper_functions.R"))
 df = readr::read_rds(here::here("data", "dicom_study_filenames.rds"))
+xdf = df
 
 dirs = list.dirs(path = "data", full.names = FALSE, recursive = FALSE)
 dirs = dirs[grepl("noneck_brain_mask.*", dirs)]
