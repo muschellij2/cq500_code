@@ -121,6 +121,8 @@ dirs_to_create = c("nifti",
                    
                    "header", "header_wide",
                    "nifti_256", "nifti_512",
+                   "nifti_conform", "nifti_1mm",
+
                    "noneck", "neck_mask",
                    "noneck_512", "neck_mask_512",
                    "noneck_256", "neck_mask_256"
@@ -142,6 +144,8 @@ df = df %>%
     fname = paste0(stub, ".nii.gz"),
     file_nifti = file.path(dirs$nifti, fname),
     file_nifti_256 = file.path(dirs$nifti_256, fname),
+    file_nifti_conform = file.path(dirs$nifti_conform, fname),
+    file_nifti_1mm = file.path(dirs$nifti_1mm, fname),
     file_nifti_512 = file.path(dirs$nifti_512, fname),
   ) %>%
   select(-fname)
