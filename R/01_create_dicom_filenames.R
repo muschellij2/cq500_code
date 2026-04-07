@@ -126,7 +126,7 @@ dirs_to_create = c("nifti",
                    "noneck", "neck_mask",
                    "noneck_512", "neck_mask_512",
                    "noneck_256", "neck_mask_256",
-                   "noneck_conform", "neck_mask_conform",
+                   "noneck_conform", "neck_mask_conform"
 )
 
 dirs = here::here("data", dirs_to_create)
