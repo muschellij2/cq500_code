@@ -19,7 +19,8 @@ eg = expand.grid(
     file_mask = here::here("data", dir, fname),
     size = case_when(
       grepl("512", dir) ~ "512",
-      grepl("256|convert|conform", dir) ~ "256"
+      grepl("256", dir) ~ "256",
+      grepl("conform", dir) ~ "conform"
     ),
     file_nifti = here::here("data", paste0("noneck_", size), fname)
   )
@@ -35,7 +36,7 @@ df = df %>%
   )
 fs::dir_create(unique(dirname(df$png)))
 df = df %>% 
-  select(file_nifti, file_mask, stub, png) 
+  select(file_nifti, file_mask, stub, dir, png) 
 df = df %>% 
   tidyr::nest(.by = file_nifti)
 
@@ -55,6 +56,8 @@ idf = df[iid,]
 file_nifti = idf$file_nifti
 print(file_nifti)
 data = idf$data[[1]]
+data = data %>% 
+  filter(file.exists(file_mask))
 print(data)
 if (any(file_empty(data$png))) {
   img = window_img(file_nifti)
@@ -64,10 +67,9 @@ if (any(file_empty(data$png))) {
     file_mask = data$file_mask[iimg]
     pngname = data$png[iimg]
     stub = data$stub[iimg]
-    if (file.exists(file_mask)) {
+    if (file.exists(file_mask) && !file.exists(pngname)) {
       roi = readnii(file_mask) > 0
       create_ortho(img, roi, stub, pngname = pngname)
-      
     }
   }
 }

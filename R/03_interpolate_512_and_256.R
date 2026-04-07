@@ -33,5 +33,24 @@ if (!file.exists(idf$file_nifti_256)) {
   neurobase::writenii(res, idf$file_nifti_256)
   # dim(res)
 }
+
+if (!file.exists(idf$file_nifti_conform)) {
+  res = freesurfer::mri_convert(
+    file = file_nifti,
+    outfile = idf$file_nifti_conform,
+    opts = "--conform"
+  )
+  # dim(res)
+}
+
+# if (!file.exists(idf$file_nifti_1mm)) {
+#   res = resample_image(file_nifti, 
+#                        parameters = c(1L, 1L, 1L),
+#                        parameter_type = "mm", 
+#                        interpolator = "nearestneighbor")
+#   neurobase::writenii(res, idf$file_nifti_1mm)
+#   # dim(res)
+# }
+
 # }
 
