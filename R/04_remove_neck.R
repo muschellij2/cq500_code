@@ -34,7 +34,7 @@ print(file_noneck)
 if (
   !all(file.exists(c(file_noneck, file_mask_neck))) &&
   file.exists(idf$file_nifti)
-    ) {
+) {
   ss.template.file =
     system.file("scct_unsmooth_SS_0.01.nii.gz",
                 package = "ichseg")
@@ -86,4 +86,17 @@ if (
                        parameter_type = "voxels", 
                        interpolator = "nearestneighbor")
   neurobase::writenii(res, idf$file_nifti_256_noneck)
+}
+
+if (
+  grepl("512", mode) && 
+  !file.exists(idf$file_nifti_conform_noneck) &&
+  file.exists(idf$file_nifti_512_noneck)
+) {
+  message("Conforming data")
+  res = freesurfer::mri_convert(
+    file = idf$file_nifti_512_noneck,
+    outfile = idf$file_nifti_conform_noneck,
+    opts = "--conform"
+  )
 }

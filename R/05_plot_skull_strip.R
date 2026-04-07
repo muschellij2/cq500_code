@@ -27,6 +27,9 @@ eg = expand.grid(
 stopifnot(!anyNA(eg$size))
 
 df = eg %>% as_tibble()
+miss = df %>%
+  filter(!file.exists(file_nifti))
+
 df = df %>%
   filter(file.exists(file_nifti))
 df = df %>% 
