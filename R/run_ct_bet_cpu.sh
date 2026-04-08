@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=CPUCTBET
-#SBATCH --time=4-00:00:00
+#SBATCH --time=7-00:00:00
 #SBATCH --output=eofiles/CPUCTBET_%A.out
 #SBATCH --error=eofiles/CPUCTBET_%A.err
 
