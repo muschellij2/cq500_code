@@ -115,7 +115,7 @@ dirs_to_create = c("nifti",
                    "noneck_brain_extracted_512", "noneck_brain_mask_512",
                    "noneck_brain_extracted_brainchop_512", "noneck_brain_mask_brainchop_512",
                    "noneck_brain_extracted_hdctbet_512", "noneck_brain_mask_hdctbet_512",
-                   "noneck_brain_mask_ctbet_512",
+                   "noneck_brain_mask_ctbet_512", 
                    "noneck_brain_extracted_synth_512", "noneck_brain_mask_synth_512",
                    "noneck_brain_mask_ctbet_512", "noneck_brain_extracted_ctbet_512",
                    "noneck_brain_extracted_original_512", "noneck_brain_mask_original_512",
@@ -169,6 +169,7 @@ df = df %>%
     
     file_ss_hdctbet = here::here(dirs$brain_extracted_hdctbet, stub),
     file_mask_hdctbet = here::here(dirs$brain_mask_hdctbet, stub),
+  
     
     
     file_ss_synth = here::here(dirs$brain_extracted_synth, stub),
@@ -187,6 +188,9 @@ df = df %>%
     file_ss_hdctbet_512 = here::here(dirs$brain_extracted_hdctbet_512, stub),
     file_mask_hdctbet_512 = here::here(dirs$brain_mask_hdctbet_512, stub),
     
+    file_ss_ctbet_512 = here::here(dirs$brain_extracted_ctbet_512, stub),
+    file_mask_ctbet_512 = here::here(dirs$brain_mask_ctbet_512, stub),
+    
     file_ss_synth_512 = here::here(dirs$brain_extracted_synth_512, stub),
     file_mask_synth_512 = here::here(dirs$brain_mask_synth_512, stub),
     
@@ -202,6 +206,9 @@ df = df %>%
     
     file_ss_hdctbet_512_noneck = here::here(dirs$noneck_brain_extracted_hdctbet_512, stub),
     file_mask_hdctbet_512_noneck = here::here(dirs$noneck_brain_mask_hdctbet_512, stub),
+    
+    file_ss_ctbet_512_noneck = here::here(dirs$noneck_brain_extracted_ctbet_512, stub),
+    file_mask_ctbet_512_noneck = here::here(dirs$noneck_brain_mask_ctbet_512, stub),
     
     file_ss_synth_512_noneck = here::here(dirs$noneck_brain_extracted_synth_512, stub),
     file_mask_synth_512_noneck = here::here(dirs$noneck_brain_mask_synth_512, stub),
