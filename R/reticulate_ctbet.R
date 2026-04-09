@@ -12,9 +12,12 @@ iid = get_fold()
 iid = 5
 idf = df[iid,]
 print(idf)
-file_nifti = idf$file_nifti_512
+file_nifti = idf$file_nifti_512_noneck
+file_mask = idf$file_mask_ctbet_512_noneck
 
-if (!file.exists(idf$))
+if (!file.exists(file_mask) && file.exists(file_nifti)) {
+  res = run_ctbet(file_nifti, file_mask)
+}
 
 
 # unlink(full_image_folder, recursive = TRUE)
