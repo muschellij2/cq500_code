@@ -40,6 +40,12 @@ df = df %>%
 fs::dir_create(unique(dirname(df$png)))
 df = df %>% 
   select(file_nifti, file_mask, stub, dir, png) 
+bad = df %>% 
+  filter(!file.exists(file_mask))
+
+df = df %>% 
+  filter(file.exists(file_mask))
+
 df = df %>% 
   tidyr::nest(.by = file_nifti)
 
@@ -63,7 +69,11 @@ data = data %>%
   filter(file.exists(file_mask))
 print(data)
 if (any(file_empty(data$png))) {
-  img = window_img(file_nifti)
+  if (grepl("conform", file_nifti)) {
+    img = readnii(file_nifti)
+  } else {
+    img = window_img(file_nifti)
+  }
   iimg = 1
   for (iimg in seq(nrow(data))) {
     print(iimg)
