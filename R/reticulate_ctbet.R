@@ -9,7 +9,7 @@ print(nrow(df))
 
 iid = get_fold()
 
-iid = 5
+# iid = 5
 idf = df[iid,]
 print(idf)
 file_nifti = idf$file_nifti_512_noneck
